@@ -1,0 +1,148 @@
+{
+	"body": [
+		{
+			"properties": [
+				{
+					"property": "AHL Property 01001",
+					"propertyType": "Home",
+                    "loanAmount": "1000000",
+					"loanTerm": "36",
+					"applicants": [
+						{
+							"customer": "AHL Account 1",
+							"income": "1000000000",
+							"expense": "2000000",
+							"phone": "+61469821176",
+							"ownership": "50.0",
+							"primaryApplicant": "false"
+						},
+						{
+							"customer": "AHL Account 11",
+							"income": "1000000000",
+							"expense": "2000000",
+							"phone": "+469821176",
+							"ownership": "30.0",
+							"primaryApplicant": "true"
+						},
+						{
+							"customer": "AHL Account 12",
+							"income": "1000000000",
+							"expense": "2000000",
+							"phone": "+469821176",
+							"ownership": "20.0",
+							"primaryApplicant": "false"
+						}
+					]
+				},
+				{
+					"property": "AHL Property 011",
+					"propertyType": "Home",
+                    "loanAmount": "1000000",
+					"loanTerm": "36",
+					"applicants": [
+						{
+							"customer": "AHL Account 3",
+							"income": "1000000000",
+							"expense": "2000000",
+							"phone": "+61469821176",
+							"ownership": "50.0",
+							"primaryApplicant": "false"
+						},
+						{
+							"customer": "AHL Account 11",
+							"income": "1000000000",
+							"expense": "2000000",
+							"phone": "+469821176",
+							"ownership": "30.0",
+							"primaryApplicant": "false"
+						},
+						{
+							"customer": "AHL Account 12",
+							"income": "1000000000",
+							"expense": "2000000",
+							"phone": "+469821176",
+							"ownership": "15.0",
+							"primaryApplicant": "false"
+						},
+						{
+							"customer": "AHL Account 13",
+							"income": "1000000000",
+							"expense": "2000000",
+							"phone": "+469821176",
+							"ownership": "5.0",
+							"primaryApplicant": "true"
+						}
+					]
+				}
+			]
+		},
+		{
+			"properties": [
+				{
+					"property": "AHL Property 020",
+					"propertyType": "Home",
+                    "loanAmount": "1000000",
+					"loanTerm": "36",
+					"applicants": [
+						{
+							"customer": "AHL Account 2",
+							"income": "1000000000",
+							"expense": "2000000",
+							"phone": "+61469821176",
+							"ownership": "50.0",
+							"primaryApplicant": "false"
+						},
+						{
+							"customer": "AHL Account 11",
+							"income": "1000000000",
+							"expense": "2000000",
+							"phone": "+469821176",
+							"ownership": "30.0",
+							"primaryApplicant": "true"
+						},
+						{
+							"customer": "AHL Account 12",
+							"income": "1000000000",
+							"expense": "2000000",
+							"phone": "+469821176",
+							"ownership": "20.0",
+							"primaryApplicant": "false"
+						}
+					]
+				},
+				{
+					"property": "AHL Property 0210",
+					"propertyType": "Home",
+                    "loanAmount": "1000000",
+					"loanTerm": "36",
+					"applicants": [
+						{
+							"customer": "AHL Account 4",
+							"income": "1000000000",
+							"expense": "2000000",
+							"phone": "+61469821176",
+							"ownership": "50.0",
+							"primaryApplicant": "false"
+						},
+						{
+							"customer": "AHL Account 11",
+							"income": "1000000000",
+							"expense": "2000000",
+							"phone": "+469821176",
+							"ownership": "30.0",
+							"primaryApplicant": "true"
+						},
+						{
+							"customer": "AHL Account 12",
+							"income": "1000000000",
+							"expense": "2000000",
+							"phone": "+469821176",
+							"ownership": "20.0",
+							"primaryApplicant": "false"
+						}
+					]
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Athena_Home_Loan</fullName>
+    <active>true</active>
+    <label>Athena Home Loan</label>
+    <picklistValues>
+        <picklist>Status__c</picklist>
+        <values>
+            <fullName>Available</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Closed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contracted</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pre Market</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Under Agreement</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Type__c</picklist>
+        <values>
+            <fullName>2-BHK</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>3-BHK</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Apartment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Home</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mall</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Shop</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

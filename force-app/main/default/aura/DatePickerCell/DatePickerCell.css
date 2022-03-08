@@ -1,0 +1,27 @@
+.THIS .small-td {
+  padding: .2rem;
+}
+
+.THIS .normal-td.datepicker-table td {
+  padding: .25rem;
+    pointer-events: none;
+    opacity: 0.4;
+}
+
+.THIS .disable-span {
+  padding: .25rem;
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+
+.THIS .small-span {
+  width: 1.2rem; height: 1.2rem; min-width: 0px; line-height: 1.3rem;
+}
+
+.THIS .small-disable-span {
+  width: 1.2rem; height: 1.2rem; min-width: 0px; line-height: 1.3rem;
+  padding: .25rem;
+  pointer-events: none;
+  opacity: 0.4;
+}

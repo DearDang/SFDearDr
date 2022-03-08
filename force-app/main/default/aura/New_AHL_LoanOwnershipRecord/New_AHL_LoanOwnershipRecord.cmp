@@ -1,0 +1,5 @@
+<aura:component >
+	<lightning:input aura:id="loanOwnershipAccount" name="Loan Ownership Account" label="Customer" required="true" />
+    <lightning:input aura:id="loanOwnershipPercentage" name="Loan Ownership Percentage" label="Ownership" required="true" />
+    <lightning:input type="checkbox" aura:id="primaryApplicant" name="Primary Applicant" label="Primary Applicant"/>    
+</aura:component>

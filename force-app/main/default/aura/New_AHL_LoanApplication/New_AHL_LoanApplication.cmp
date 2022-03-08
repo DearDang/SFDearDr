@@ -1,0 +1,165 @@
+<aura:component implements="lightning:actionOverride,flexipage:availableForRecordHome,force:hasRecordId" access="global" controller="LoanOwnershipController">
+    <aura:attribute name = "loanApplicationNumber" type = "String"></aura:attribute>
+    <aura:attribute name = "loanApplications" type = "Object[]"></aura:attribute>
+    <aura:attribute name = "showError" type = "Boolean"></aura:attribute>
+    <aura:attribute name = "errorMessage" type = "String"></aura:attribute>
+    <aura:attribute name = "loanApplicationBundle" type = "String"></aura:attribute>
+    <aura:attribute name = "pageLoaded" type = "Boolean" default = "true"></aura:attribute>
+    <aura:attribute name = "submittedLoanApplications" type = "Object[]"></aura:attribute>
+    <aura:attribute name = "isAtLeastOneApplicationSubmitted" type = "Boolean" default = "false"></aura:attribute>
+    <aura:attribute name = "propertyTypeValues" type = "String[]"></aura:attribute>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />   
+    
+    <div aura:id="editDialog" role="dialog" tabindex="-1" aria-labelledby="header43" class="slds-modal slds-fade-in-open"> 
+        <div>
+        	<aura:if isTrue="{! v.pageLoaded }">
+            	<aura:set attribute="else">
+                	<lightning:spinner alternativeText="Loading" />
+            	</aura:set>
+        	</aura:if>
+    	</div>
+        <div class="slds-modal__container  slds-scrollable">
+            <div class="slds-modal__header">
+               <h1 class="slds-text-heading--large">New Application</h1>
+        	</div>
+        	<aura:if isTrue="{!v.showError}">
+        		<div class="slds-notify slds-notify_toast slds-theme_error">
+            		<span class="slds-assistive-text">Error</span>
+            			<div class="slds-notify__content">
+                			<h5 class="slds-text-heading_small slds-align_absolute-center">Error Message </h5>
+                			<br/>
+                			<p class="slds-align_absolute-center">{!v.errorMessage}</p>                
+            			</div>
+        		</div>
+    		</aura:if>
+            <aura:if isTrue="{!v.isAtLeastOneApplicationSubmitted}">
+                <div class="sldx-box" > 
+                    <div class="slds-modal__content slds-grid slds-wrap slds-p-around--large">
+            			<h3 class="slds-text-heading--large">Submitted Loan Applications</h3>
+            		</div> 
+                    <div class="sldx-box"  > 
+            			<div class="slds-modal__content slds-grid slds-wrap slds-p-around--large">
+            				<div class="slds-size_1-of-1 slds-p-horizontal--large">
+                    			<table class="slds-table">
+                        			<thead>
+                            			<tr>
+                                			<!--<th scope="col"><div class="slds-truncate" title="ApplicantID">ApplicantID</div></th> -->
+                                			<th scope="col"><div class="slds-truncate" title="LoanApplicationIdentifier">Reference ID</div></th>
+                                			<th scope="col"><div class="slds-truncate" title="Opportunity">Opportunity</div></th>
+                                			<th scope="col"><div class="slds-truncate" title="Primary Applicant">Primary Applicant</div></th>
+                                			<th scope="col"><div class="slds-truncate" title="Property">Property</div></th>
+                                			<th scope="col"><div class="slds-truncate" title="Loan Amount">Loan Amount</div></th>
+                                			<th scope="col"><div class="slds-truncate" title="Loan Term">Loan Term</div></th>
+                                            <th scope="col"><div class="slds-truncate" title="Action">Action</div></th>
+                                            
+                            			</tr>
+                        			</thead>
+                        			<tbody>
+                            			<aura:iteration items="{!v.submittedLoanApplications}" var="submittedLoanApplication" indexVar="index2">
+                            				<tr>
+                                    			<!--<td data-label="ApplicantID"><lightning:formattedText value="{!applicant.applicantIdentifier}" label="ApplicantID">{!applicant.applicantIdentifier}</lightning:formattedText></td> -->
+                            					<td data-label="LoanApplicationIdentifier">
+                                                    <lightning:formattedText value="{!submittedLoanApplication.Loan_Application__c.Name}"/>
+                                                </td>
+                            					<td data-label="Opportunity">
+                                                    <lightning:formattedText value="{!submittedLoanApplication.Opportunity.Name}"/>
+                                                </td>
+                            					<td data-label="Primary Applicant">
+                                                    <lightning:formattedText value="{!submittedLoanApplication.Account.Name}"/>
+                                                </td>
+                            					<td data-label="Property">
+                                                    <lightning:formattedText value="{!submittedLoanApplication.Property__c.Name}"/>
+                                                </td>
+                            					<td data-label="Loan Amount">
+                                                   <lightning:formattedNumber value="{!submittedLoanApplication.Opportunity.Loan_Amount__c}"/>
+                                                </td>
+                                    			<td data-label="Loan Term">
+                                                    <lightning:formattedNumber value="{!submittedLoanApplication.Opportunity.Loan_Term__c}"/>
+                                                </td>
+                                    			<td data-label="Action">
+                                                    <lightning:button class="slds-align_left" variant="neutral" label="Edit" value="{!submittedLoanApplication}" onclick="{!c.editLoanApplication}"></lightning:button>
+                                                    <lightning:button class="slds-align_right" variant="neutral" label="Delete" value="{!submittedLoanApplication}" onclick="{!c.deleteLoanApplication}"></lightning:button>
+                                                </td>
+                                			</tr>
+                                        </aura:iteration>
+                        			</tbody>
+                    			</table>
+                			</div>
+            			</div>
+                	</div>
+            	</div>
+            </aura:if>
+            <aura:iteration items="{!v.loanApplications}" var="loanApplication" indexVar="index1">
+                <div class="sldx-box" >
+                    <div class="slds-modal__header">
+               			<h3 class="slds-text-heading--large">New Loan Application</h3>
+            		</div>            
+                	<div class="slds-modal__content slds-grid slds-wrap slds-p-around--large">
+            			<h3 class="slds-text-heading--large">{!loanApplication.loanApplicationIdentifier}</h3>
+            		</div>
+                	<div class="sldx-box" > 
+            			<div class="slds-modal__content slds-grid slds-wrap slds-p-around--large">
+                			<lightning:input aura:id="oppProperty" name="Property" label="Property Name" required="true" class="slds-size--1-of-2 slds-p-horizontal_x-large" value="{!loanApplication.property}">{!loanApplication.property}</lightning:input>   
+                            <lightning:select aura:id="select" name="select" label="Property Type" class="slds-size--1-of-2 slds-p-horizontal_x-large"  required="true" onchange="{!c.setPropertyType}">
+                                <option value="">Select Property Type...</option>
+                                <aura:iteration items="{!v.propertyTypeValues}" var="propertyTypeValue" indexVar="index2">
+                                    <option value="{!loanApplication.loanApplicationIdentifier + '_' + propertyTypeValue}">{!propertyTypeValue}</option>
+                                </aura:iteration>
+                            </lightning:select>
+                            <lightning:input aura:id="loanAmount" name="Loan Amount" label="Loan Amount" required="true" class="slds-size--1-of-2 slds-p-horizontal_x-large" value="{!loanApplication.loanAmount}">{!loanApplication.loanAmount}</lightning:input> 
+                			<lightning:input aura:id="loanTerm" name="Loan Term" label="Loan Term" required="true" class="slds-size--1-of-2 slds-p-horizontal_x-large" value="{!loanApplication.loanTerm}">{!loanApplication.loanTerm}</lightning:input>                 			
+            			</div>
+                    </div>
+                	<div class="sldx-box"  > 
+            			<div class="slds-modal__content slds-grid slds-wrap slds-p-around--large">
+            				<div class="slds-size_1-of-1 slds-p-horizontal--large">
+                    			<table class="slds-table">
+                        			<thead>
+                            			<tr>
+                                			<!--<th scope="col"><div class="slds-truncate" title="ApplicantID">ApplicantID</div></th> -->
+                                			<th scope="col"><div class="slds-truncate" title="Customer">Customer</div></th>
+                                			<th scope="col"><div class="slds-truncate" title="Income">Income</div></th>
+                                			<th scope="col"><div class="slds-truncate" title="Expense">Expense</div></th>
+                                			<th scope="col"><div class="slds-truncate" title="Ownership">Ownership</div></th>
+                                			<th scope="col"><div class="slds-truncate" title="Primary Applicant">Primary Applicant</div></th>
+                                			<th scope="col"><div class="slds-truncate" title="Action">Action</div></th>
+                            			</tr>
+                        			</thead>
+                        			<tbody>
+                            			<aura:iteration items="{!loanApplication.applicants}" var="applicant" indexVar="index2">
+                            				<tr>
+                                    			<!--<td data-label="ApplicantID"><lightning:formattedText value="{!applicant.applicantIdentifier}" label="ApplicantID">{!applicant.applicantIdentifier}</lightning:formattedText></td> -->
+                            					<td data-label="Customer"><lightning:input class="slds-align_left" value="{!applicant.customer}">{!applicant.customer}</lightning:input></td>
+                            					<td data-label="Income"><lightning:input class="slds-align_left" value="{!applicant.income}" type="number">{!applicant.income}</lightning:input></td>
+                            					<td data-label="Expense"><lightning:input class="slds-align_left" value="{!applicant.expense}" type="number">{!applicant.expense}</lightning:input></td>
+                            					<td data-label="Ownership"><lightning:input class="slds-align_left" value="{!applicant.ownership}" type="number">{!applicant.ownership}</lightning:input></td>
+                            					<td data-label="Primary Applicant"><lightning:input class="slds-align_center" type="checkbox" value="{!applicant}" checked ="{!applicant.primaryApplicant}"  onchange="{!c.changePrimaryApplicant}"></lightning:input></td>
+                                    			<td data-label="Delete"><lightning:button class="slds-align_center" variant="neutral" label="Delete" value="{!applicant}" onclick="{!c.deleteApplicant}"></lightning:button></td>
+                                			</tr>                                    
+                            			</aura:iteration>
+                                		<tr>
+                                        	<td data-label="AddApplicants"><lightning:button class="slds-align_left" variant="neutral" label="Add Applicants" value="{!loanApplication}" onclick="{!c.addApplicant}"/>  </td>
+                                    	</tr>
+                        			</tbody>
+                    			</table>
+                			</div>
+            			</div>
+                	</div>
+                	<div class="slds-modal__content slds-grid slds-wrap slds-p-around--large">
+                        <lightning:button class="slds-align_absolute-center" variant="brand" label="Save" value="{!loanApplication}" onclick="{!c.saveLoanApplication}" />
+                		<lightning:button class="slds-align_absolute-center" variant="neutral" label="Delete" value="{!loanApplication}" onclick="{!c.deleteLoanApplication}"/>                	
+            		</div>
+            	</div>
+   			</aura:iteration>            
+			<div class="slds-modal__footer slds-grid slds-wrap slds-p-around--large">
+            	<lightning:button class="slds-align_absolute-center" variant="neutral" label="Add Property" onclick="{!c.addOneMoreProperty}"/>                
+            </div>                        
+            <div class="slds-modal__footer slds-grid slds-wrap slds-p-around--large">                
+                <lightning:button class="slds-align_absolute-center" variant="neutral" label="Close" onclick="{!c.cancelDialog}"/>
+                <lightning:button class="slds-align_absolute-center" variant="brand" label="Submit" onclick="{!c.submitLoanApplication}" />
+            </div>
+        </div>
+    </div>
+    <div aura:id="overlay" class="slds-backdrop slds-backdrop--open"></div>
+</aura:component>
